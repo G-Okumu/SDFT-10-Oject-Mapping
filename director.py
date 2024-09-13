@@ -45,7 +45,7 @@ class Director:
         self.id = db_cursor.execute("SELECT last_insert_rowid() FROM directors").fetchone()[0]
 
     
-    ## Get all dorectors
+    ## Get all directors
     @classmethod
     def get_all_directors(cls):
         query = """
@@ -56,14 +56,17 @@ class Director:
         
         return data_found;
         
+    ## Method to return all movies for a certain director
+    def get_all_movies_for_director(self):
+        movies = db_cursor.execute(""" SELECT * from movies where movies.director_id = ? """, (self.id,)).fetchall()
+        movies_list = []
+        ## Change the movie tuple into Object now
+        for movie in movies:
+            movies_list.append({"title": movie[1], "genre": movie[2], "created_on": movie[4]})
+            
+        print(movies_list)
         
-        
-    
-        
-
-    
-        
-        
-    # def returns_all_director_movies(self):
-    #     from movie import Movie
-    #     return [{'title': movie.title, 'genre': movie.genre} for movie in Movie.all_movie_instances if movie.director == self]
+    def director_add_movie(self, title, genre):
+        db_cursor.execute(""" insert into movies (title, genre, director_id, created_at, updated_at) values (?, ?, ?, datetime('now'), datetime('now')) """, (title, genre, self.id,))
+        db_connection.commit()
+        print("Movie added")
