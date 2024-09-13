@@ -31,3 +31,20 @@ GOT = Movie('Game Of Thrones', 'Fantasy & War', direct1.id)
 lord_of_the_rings.save()
 harry_porter.save()
 GOT.save()
+
+print("                  ")
+print("   All Movies               ")
+
+Movie.display_all_movie_instances()
+
+print("                  ")
+print("    Director adding a movie    ")
+direct2.director_add_movie("Prison Break", "War & Crime")
+
+print("                  ")
+print("    All Movies for a certain Director    ")
+
+direct1.get_all_movies_for_director()
+
+
+
