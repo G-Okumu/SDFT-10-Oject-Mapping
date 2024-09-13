@@ -31,6 +31,9 @@ This project provides a simple Python-based system for managing movies and their
     db_connection = sqlite3.connect('db/movie.sqlite3')
     db_cursor = db_connection.cursor()
 
+## Database Diagram Drawing
+[Link to the database diagram](https://dbdiagram.io/d/Movie-DB-Diagram-66e319a46dde7f4149eedce3)
+
 
 ## Classes
 
