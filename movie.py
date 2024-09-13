@@ -49,8 +49,14 @@ class Movie:
         db_cursor.execute(query, (self.title, self.genre, self.director_id,))
         db_connection.commit()
     
-    # @classmethod
-    # def display_all_movie_instances(cls):
-    #     print("Below is all movie instances")
-    #     return [{"title": movie.title, "genre": movie.genre, "director": movie.director.name} for movie in Movie.all_movie_instances]
+    ## Get all movies plus directors
+    @classmethod
+    def display_all_movie_instances(cls):
+        print("Below are all movies")
+        print("                    ")
+        
+        movies = db_cursor.execute(""" select movies.*, d.name from movies join directors d ON movies.director_id = d.id""").fetchall() ## This returns a tuple of movie rows
+        for row in movies:
+            print(f"Title: {row[1]}, Genre: {row[2]}, Director: {row[6]}, Created On: {row[4]}")
+           
         
