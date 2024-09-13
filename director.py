@@ -5,7 +5,8 @@ class Director:
     
     list_of_directors = []
     
-    def __init__(self, name) -> None:
+    def __init__(self, name, id = None) -> None:
+        self.id = id
         self.name = name
         
     @classmethod
@@ -40,6 +41,9 @@ class Director:
         
         db_cursor.execute(query, (self.name,))
         db_connection.commit()
+        ## Reassing the id from db to be used in movie.py to check existence of db
+        self.id = db_cursor.execute("SELECT last_insert_rowid() FROM directors").fetchone()[0]
+
     
     ## Get all dorectors
     @classmethod
